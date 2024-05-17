@@ -56,14 +56,23 @@ resource "aws_security_group" "free_tier_sg" {
   vpc_id = aws_vpc.free_tier_vpc.id
   description = "Example security group for SSH and HTTP access"
 
-   ingress {
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
-    cidr_blocks     = ["192.168.0.11/32"]  # Permitir tráfico HTTP desde cualquier dirección IP
+  # Regla de ingreso para SSH desde una dirección IP específica
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["192.168.0.11/32"]  # Cambia esta dirección IP por la tuya
   }
 
-   ingress {
+  # Regla de ingreso para SSH desde las direcciones IP del servicio Conexión de instancias de EC2
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["18.206.107.24/29"]  # Direcciones IP del servicio Conexión de instancias de EC2
+  }
+
+  ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -99,4 +108,7 @@ resource "aws_instance" "free_tier_instance" {
   tags = {
     Name = "free-tier-instance"
   }
+
+  # Asociar la instancia al grupo de seguridad creado
+  vpc_security_group_ids = [aws_security_group.free_tier_sg.id]
 }

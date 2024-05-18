@@ -26,5 +26,5 @@ Este proyecto contiene el código de Terraform para configurar un entorno de AWS
 
 Notas
 
-    Asegúrate de actualizar la variable ssh_ip en terraform.tfvars con tu dirección IP actual.
+    Asegúrate de actualizar la variable ssh_ip con tu dirección IP actual.
     El archivo .gitignore está configurado para ignorar archivos sensibles como *.tfstate y *.tfvars.

@@ -1,6 +1,6 @@
 # Crear un grupo de seguridad
 resource "aws_security_group" "free_tier_sg" {
-  vpc_id      = aws_vpc.free_tier_vpc.id
+  vpc_id      = var.vpc_id
   description = "Example security group for SSH and HTTP access"
 
   # Permitir tráfico SSH desde una dirección IP específica y desde el servicio de Conexión de instancias de EC2

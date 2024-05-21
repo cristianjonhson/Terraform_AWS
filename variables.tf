@@ -26,6 +26,25 @@ variable "ami_id" {
 variable "instance_type" {
   description = "EC2 instance type"                 # Descripción de la variable
   default     = "t2.micro"                          # Valor por defecto para el tipo de instancia
+
+}
+
+# Variable para el puerto SSH
+variable "ssh_port" {
+  description = "Port for SSH access"
+  default     = 22
+}
+
+# Variable para el puerto HTTP
+variable "http_port" {
+  description = "Port for HTTP access"
+  default     = 80
+}
+
+# Variable para el puerto HTTPS
+variable "https_port" {
+  description = "Port for HTTPS access"
+  default     = 443
 }
 
 # Variable para la dirección IP permitida para acceder por SSH a la instancia EC2

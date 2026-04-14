@@ -20,6 +20,26 @@ variable "security_group_id" {
   type        = string
 }
 
+variable "metadata_http_tokens_required" {
+  description = "Require IMDSv2 tokens"
+  type        = bool
+}
+
+variable "root_volume_encrypted" {
+  description = "Enable encryption for root EBS volume"
+  type        = bool
+}
+
+variable "root_volume_size" {
+  description = "Root EBS volume size in GiB"
+  type        = number
+}
+
+variable "root_volume_type" {
+  description = "Root EBS volume type"
+  type        = string
+}
+
 variable "name" {
   description = "Name for the EC2 instance"
   type        = string

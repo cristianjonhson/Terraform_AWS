@@ -1,9 +1,9 @@
 # Variable para el CIDR block de la VPC
 variable "vpc_cidr" {
-  description = "CIDR block for the VPC" # Descripción de la variable
+  description = "Bloque CIDR de la VPC" # Descripción de la variable
 }
 
 variable "name" {
-  description = "Name for the VPC"
+  description = "Nombre para la VPC"
   type        = string
 }

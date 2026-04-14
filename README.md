@@ -15,7 +15,7 @@ El despliegue crea:
 - Una tabla de rutas con salida a Internet.
 - La asociación de tabla de rutas a la subred.
 - Un Security Group con reglas para SSH, HTTP y HTTPS.
-- Una instancia EC2 en subred pública.
+- Una instancia EC2 en subred pública con hardening basico.
 
 ## Quick Start
 
@@ -154,6 +154,10 @@ Variables principales disponibles en `variables.tf`:
 - `ssh_ip` (default definido en el repositorio; cámbialo por tu IP)
 - `ec2_connect_ips` (rango permitido para EC2 Instance Connect)
 - `all_traffic_cidr` (default: `0.0.0.0/0`)
+- `metadata_http_tokens_required` (default: `true`, fuerza IMDSv2)
+- `root_volume_encrypted` (default: `true`)
+- `root_volume_size` (default: `8`)
+- `root_volume_type` (default: `gp3`)
 
 ### 4) Archivo terraform.tfvars (recomendado)
 
@@ -166,7 +170,29 @@ availability_zone = "us-east-1a"
 instance_type     = "t2.micro"
 ssh_ip            = "TU_IP_PUBLICA/32"
 all_traffic_cidr  = "0.0.0.0/0"
+metadata_http_tokens_required = true
+root_volume_encrypted         = true
+root_volume_size              = 8
+root_volume_type              = "gp3"
 ```
+
+## Mejoras de seguridad incluidas
+
+Esta rama incluye un hardening basico para reducir riesgos comunes en entornos AWS:
+
+- IMDSv2 habilitado en EC2 (`http_tokens = required` por defecto).
+- Volumen raiz EBS cifrado por defecto.
+- Volumen raiz parametrizable (`size` y `type`) para control operativo.
+- Validaciones de puertos para evitar rangos invalidos (`1-65535`).
+- Validaciones CIDR para `ssh_ip`, `ec2_connect_ips` y `all_traffic_cidr`.
+- Bloqueo de `ssh_ip = 0.0.0.0/0` para evitar exposicion SSH global.
+
+Archivos impactados por estas mejoras:
+
+- `main.tf`
+- `variables.tf`
+- `modules/4-ec2_instance/main.tf`
+- `modules/4-ec2_instance/variables.tf`
 
 ## Cómo ejecutar
 
@@ -345,6 +371,8 @@ Fuente: docs/evidencias/c4-container.puml
 
 - No subas archivos `.tfvars` con secretos al repositorio.
 - Mantén `ssh_ip` restringido a tu IP pública real en formato `/32`.
+- Mantén habilitado `metadata_http_tokens_required = true` para exigir IMDSv2.
+- Mantén `root_volume_encrypted = true` para cifrado en reposo del volumen raiz.
 - Revisa costos de recursos antes de aplicar en cuentas productivas.
 - Considera usar backend remoto para estado en equipos (S3 + DynamoDB lock).
 

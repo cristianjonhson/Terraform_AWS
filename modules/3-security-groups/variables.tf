@@ -1,42 +1,42 @@
 variable "vpc_id" {
-  description = "ID of the VPC"
+  description = "ID de la VPC"
   type        = string
 }
 
 variable "ssh_port" {
-  description = "Port for SSH access"
+  description = "Puerto para acceso SSH"
   type        = number
 }
 
 variable "http_port" {
-  description = "Port for HTTP access"
+  description = "Puerto para acceso HTTP"
   type        = number
 }
 
 variable "https_port" {
-  description = "Port for HTTPS access"
+  description = "Puerto para acceso HTTPS"
   type        = number
 }
 
 # Variable para la dirección IP permitida para acceder por SSH a la instancia EC2
 variable "ssh_ip" {
-  description = "IP address allowed to SSH into the EC2 instance"
+  description = "Dirección IP permitida para acceder por SSH a la instancia EC2"
   type        = string
 }
 
 # Variable para el rango de direcciones IP del servicio Conexión de instancias de EC2
 variable "ec2_connect_ips" {
-  description = "IP range for EC2 Instance Connect service"
+  description = "Rango de direcciones IP del servicio Conexión de instancias de EC2"
   type        = string
 }
 
 # Variable para el CIDR block que permite todo el tráfico
 variable "all_traffic_cidr" {
-  description = "CIDR block to allow all traffic"
+  description = "Bloque CIDR para permitir todo el tráfico"
   type        = string
 }
 
 variable "name" {
-  description = "Name of the Security Group"
+  description = "Nombre del Security Group"
   type        = string
 }

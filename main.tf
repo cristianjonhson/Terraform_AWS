@@ -55,10 +55,14 @@ module "security_group" {
 
 # Crear una instancia EC2
 module "ec2_instance" {
-  source            = "./modules/4-ec2_instance"
-  ami_id            = var.ami_id
-  instance_type     = var.instance_type
-  subnet_id         = module.subnet.subnet_id
-  security_group_id = module.security_group.security_group_id
-  name              = "free-tier-instance"
+  source                        = "./modules/4-ec2_instance"
+  ami_id                        = var.ami_id
+  instance_type                 = var.instance_type
+  subnet_id                     = module.subnet.subnet_id
+  security_group_id             = module.security_group.security_group_id
+  metadata_http_tokens_required = var.metadata_http_tokens_required
+  root_volume_encrypted         = var.root_volume_encrypted
+  root_volume_size              = var.root_volume_size
+  root_volume_type              = var.root_volume_type
+  name                          = "free-tier-instance"
 }

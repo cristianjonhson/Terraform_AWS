@@ -1,12 +1,12 @@
 # Variable para el ID de la AMI (Amazon Machine Image) de la instancia EC2
 variable "ami_id" {
-  description = "AMI ID for the EC2 instance"       # Descripción de la variable
+  description = "AMI ID for the EC2 instance" # Descripción de la variable
   type        = string
 }
 
 # Variable para el tipo de instancia EC2
 variable "instance_type" {
-  description = "EC2 instance type"                 # Descripción de la variable
+  description = "EC2 instance type" # Descripción de la variable
   type        = string
 }
 

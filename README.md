@@ -2,7 +2,7 @@
 
 ![Terraform](https://img.shields.io/badge/Terraform-IaC-844FBA?logo=terraform&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-Cloud-232F3E?logo=amazonaws&logoColor=white)
-![Licencia](https://img.shields.io/badge/Licencia-No%20especificada-lightgrey)
+
 ![Estado](https://img.shields.io/badge/Estado-Activo-success)
 
 Este repositorio aprovisiona una infraestructura base en AWS usando Terraform y una arquitectura por módulos.

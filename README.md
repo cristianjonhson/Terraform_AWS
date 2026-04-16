@@ -249,6 +249,10 @@ Se recomienda adjuntar evidencias visuales para PR y portfolio:
 
 ![Arquitectura AWS del proyecto](docs/evidencias/arquitectura-aws.png)
 
+### Arquitectura AWS (alternativa portfolio)
+
+![Arquitectura AWS alternativa para portfolio](docs/evidencias/arquitectura-aws-v2.png)
+
 - Captura de la salida de terraform plan.
 - Captura de terraform apply exitoso.
 - Captura de terraform output public_ip y/o salida completa.
@@ -268,6 +272,9 @@ Plantilla sugerida:
 
 ### 4) Arquitectura AWS
 ![Arquitectura AWS](docs/evidencias/arquitectura-aws.png)
+
+### 5) Arquitectura AWS (alternativa)
+![Arquitectura AWS alternativa](docs/evidencias/arquitectura-aws-v2.png)
 ```
 
 ## Buenas prácticas y seguridad

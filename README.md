@@ -245,6 +245,10 @@ Notas:
 
 Se recomienda adjuntar evidencias visuales para PR y portfolio:
 
+### Arquitectura AWS (actual)
+
+![Arquitectura AWS del proyecto](docs/evidencias/arquitectura-aws.png)
+
 - Captura de la salida de terraform plan.
 - Captura de terraform apply exitoso.
 - Captura de terraform output public_ip y/o salida completa.

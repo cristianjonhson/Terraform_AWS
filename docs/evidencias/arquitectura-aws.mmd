@@ -1,0 +1,29 @@
+flowchart LR
+    U[Usuario / Internet]:::internet
+
+    subgraph AWS[AWS Cloud]
+      direction LR
+
+      subgraph VPC[VPC\n10.0.0.0/16]
+        direction LR
+
+        IGW[Internet Gateway]:::network
+
+        subgraph PUB[Subred Publica\n10.0.1.0/24]
+          direction TB
+          RT[Route Table\n0.0.0.0/0 -> IGW]:::network
+          SG[Security Group\nSSH 22 / HTTP 80 / HTTPS 443]:::security
+          EC2[EC2 t2.micro]:::compute
+        end
+      end
+    end
+
+    U -->|HTTP/HTTPS| EC2
+    U -->|SSH| SG
+    EC2 --> SG
+    PUB --> RT --> IGW --> U
+
+    classDef internet fill:#F3F4F6,stroke:#374151,stroke-width:1px,color:#111827;
+    classDef network fill:#D9EFFF,stroke:#0073BB,stroke-width:1.2px,color:#0B3A5B;
+    classDef security fill:#FFE6D5,stroke:#FF9900,stroke-width:1.2px,color:#7A4A00;
+    classDef compute fill:#FFE5E8,stroke:#C9252D,stroke-width:1.2px,color:#6A0F14;

@@ -289,7 +289,7 @@ Plantilla sugerida:
 ![Arquitectura AWS alternativa](docs/evidencias/arquitectura-aws-v2.png)
 
 ### 6) Arquitectura AWS (PlantUML)
-![Arquitectura AWS PlantUML](docs/evidencias/arquitectura-aws.png)
+Fuente: docs/evidencias/arquitectura-aws.puml
 ```
 
 ## Buenas prácticas y seguridad

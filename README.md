@@ -1,65 +1,203 @@
-# Configuración de Terraform para Instancia EC2 en AWS
+# Terraform AWS - Infraestructura modular con EC2
 
-Este proyecto contiene el código de Terraform para desplegar una infraestructura básica en AWS utilizando módulos.Los módulos permiten una mejor organización y reutilización del código, facilitando el mantenimiento y la escalabilidad de la infraestructura. 
+Este repositorio aprovisiona una infraestructura base en AWS usando Terraform y una arquitectura por módulos.
 
-Un entorno de AWS con una VPC, una subred pública, una puerta de enlace de internet, una tabla de rutas, un grupo de seguridad y una instancia EC2. Incluye variables para una fácil configuración y personalización.
+El despliegue crea:
 
-## Prerrequisitos
+- Una VPC.
+- Una subred pública.
+- Un Internet Gateway.
+- Una tabla de rutas con salida a Internet.
+- La asociación de tabla de rutas a la subred.
+- Un Security Group con reglas para SSH, HTTP y HTTPS.
+- Una instancia EC2 en subred pública.
 
-- Terraform instalado en tu máquina local.
-- AWS CLI configurado con credenciales de usuario IAM apropiadas.
+## Objetivo del proyecto
 
-## Estructura de Archivos
+Proveer una base simple, clara y reutilizable para desplegar una instancia EC2 con conectividad pública, separando cada componente de red y cómputo en módulos independientes.
 
-- `main.tf`: Contiene la configuración principal de Terraform para los recursos de AWS.
-- `variables.tf`: Contiene las definiciones de variables utilizadas en la configuración de Terraform.
-- `.gitignore`: Especifica los archivos y directorios que deben ser ignorados en el control de versiones.
+## Tecnologías usadas
 
-## Variables
+- Terraform.
+- Provider AWS de Terraform.
+- AWS (VPC, Subnet, Route Table, Internet Gateway, Security Group, EC2).
+- AWS CLI (para autenticación y validación local).
 
-- `vpc_cidr`: El bloque CIDR de la VPC (por defecto: "10.0.0.0/16").
-- `subnet_cidr`: El bloque CIDR de la subred (por defecto: "10.0.1.0/24").
-- `availability_zone`: La zona de disponibilidad donde se creará la subred (por defecto: "us-east-1a").
-- `all_traffic_cidr`: El bloque CIDR que permite todo el tráfico (por defecto: "0.0.0.0/0").
-- `ssh_ip`: La dirección IP específica que permitirá el acceso SSH (cambiar por la tuya).
-- `ec2_connect_ips`: Las direcciones IP del servicio Conexión de instancias de EC2 (por defecto: ["18.206.107.24/29"]).
-- `ami_id`: El ID de la AMI para la instancia EC2 (por defecto: "ami-0c0b74d29acd0cd97").
-- `instance_type`: El tipo de instancia EC2 (por defecto: "t2.micro").
+## Arquitectura (alto nivel)
 
-## Cambios Realizados 
+Flujo de dependencias principal:
 
-### Transición de Recursos a Módulos
+1. VPC.
+2. Subnet (depende de VPC).
+3. Internet Gateway (depende de VPC).
+4. Route Table (depende de VPC e Internet Gateway).
+5. Asociación Route Table <-> Subnet.
+6. Security Group (depende de VPC).
+7. EC2 (depende de Subnet y Security Group).
 
-Se llevó a cabo una reestructuración significativa del código, donde los recursos individuales fueron convertidos en módulos para mejorar la modularidad y la claridad del código.
+## Estructura del repositorio
 
-1. **Módulo `vpc`**: Se creó un módulo para la VPC, encapsulando la lógica y configuración relacionada con la VPC.
+```
+.
+├── main.tf
+├── variables.tf
+├── outputs.tf
+└── modules
+        ├── 1-vpc
+        ├── 2-subnet
+        ├── 3-security-groups
+        ├── 4-ec2_instance
+        ├── 5-internet_gateway
+        └── 6-route_table
+```
 
-2. **Módulo `subnet`**: Se creó un módulo para la subred pública, permitiendo una configuración más detallada y modular de la subred.
+Descripción rápida:
 
-3. **Módulo `internet_gateway`**: Se implementó un módulo para la puerta de enlace de Internet, separando la configuración de esta entidad de red.
+- `main.tf`: Orquesta módulos y recursos de asociación.
+- `variables.tf`: Variables de entrada globales.
+- `outputs.tf`: Salidas principales del despliegue.
+- `modules/*`: Implementación desacoplada por dominio de infraestructura.
 
-4. **Módulo `route_table`**: Se creó un módulo para la tabla de rutas, facilitando su configuración y asociación con otros recursos.
+## Requisitos
 
-5. **Módulo `security_groups`**: Se transformó el grupo de seguridad en un módulo independiente, permitiendo una gestión más flexible y granular de las reglas de seguridad.
+Antes de ejecutar:
 
-6. **Módulo `ec2_instance`**: Se creó un módulo para la instancia EC2, encapsulando su configuración y facilitando su despliegue.
+- Terraform instalado (recomendado: versión reciente estable).
+- AWS CLI instalado y configurado.
+- Credenciales AWS válidas con permisos para crear recursos de red y EC2.
+- Una cuenta de AWS activa.
 
-### Actualización de Variables y Parámetros
+Opcional recomendado:
 
-Las variables de entrada se han actualizado para reflejar la nueva estructura basada en módulos, permitiendo una configuración más eficiente y modular.
+- `terraform fmt` y `terraform validate` en tu flujo local.
 
-## Pasos para Desplegar la Infraestructura
+## Configuración
 
-1. Clona este repositorio en tu máquina local.
-2. Actualiza las variables de entrada en el archivo `variables.tf` según tus necesidades y los parámetros de los módulos correspondientes.
-3. Ejecuta `terraform init` para inicializar el entorno de Terraform.
-4. Ejecuta `terraform plan -out=tfplan` para revisar los cambios propuestos.
-5. Si todo se ve bien, ejecuta `terraform apply tfplan` para aplicar los cambios y desplegar la infraestructura en AWS.
+### 1) Credenciales de AWS
 
-Recuerda revisar detenidamente los parámetros de los módulos y las variables de entrada para garantizar un despliegue exitoso y conforme a tus requerimientos.
+Configura credenciales con AWS CLI:
 
+```bash
+aws configure
+```
 
-Notas
+También puedes usar perfiles:
 
-    Asegúrate de actualizar la variable ssh_ip con tu dirección IP actual.
-    El archivo .gitignore está configurado para ignorar archivos sensibles como *.tfstate y *.tfvars.
+```bash
+export AWS_PROFILE=tu-perfil
+```
+
+### 2) Región
+
+La región está definida en `main.tf` actualmente como `us-east-1`.
+
+Si deseas otra región, actualízala en el bloque `provider "aws"`.
+
+### 3) Variables del proyecto
+
+Variables principales disponibles en `variables.tf`:
+
+- `vpc_cidr` (default: `10.0.0.0/16`)
+- `subnet_cidr` (default: `10.0.1.0/24`)
+- `availability_zone` (default: `us-east-1a`)
+- `ami_id` (default definido en el repositorio)
+- `instance_type` (default: `t2.micro`)
+- `ssh_port` (default: `22`)
+- `http_port` (default: `80`)
+- `https_port` (default: `443`)
+- `ssh_ip` (default definido en el repositorio; cámbialo por tu IP)
+- `ec2_connect_ips` (rango permitido para EC2 Instance Connect)
+- `all_traffic_cidr` (default: `0.0.0.0/0`)
+
+### 4) Archivo terraform.tfvars (recomendado)
+
+Crea un archivo `terraform.tfvars` para sobreescribir valores sin tocar `variables.tf`:
+
+```hcl
+vpc_cidr          = "10.0.0.0/16"
+subnet_cidr       = "10.0.1.0/24"
+availability_zone = "us-east-1a"
+instance_type     = "t2.micro"
+ssh_ip            = "TU_IP_PUBLICA/32"
+all_traffic_cidr  = "0.0.0.0/0"
+```
+
+## Cómo ejecutar
+
+En la raíz del proyecto:
+
+1. Inicializar:
+
+```bash
+terraform init
+```
+
+2. Formatear y validar:
+
+```bash
+terraform fmt -recursive
+terraform validate
+```
+
+3. Revisar plan:
+
+```bash
+terraform plan -out=tfplan
+```
+
+4. Aplicar infraestructura:
+
+```bash
+terraform apply tfplan
+```
+
+## Salidas del despliegue
+
+El proyecto expone, entre otras, estas salidas en `outputs.tf`:
+
+- `vpc_id`
+- `subnet_id`
+- `igw_id`
+- `route_table_id`
+- `security_group_id`
+- `instance_id`
+- `public_ip`
+
+Para consultarlas:
+
+```bash
+terraform output
+```
+
+## Cómo destruir la infraestructura
+
+Cuando quieras eliminar todo lo creado:
+
+```bash
+terraform destroy
+```
+
+## Buenas prácticas y seguridad
+
+- No subas archivos `.tfvars` con secretos al repositorio.
+- Mantén `ssh_ip` restringido a tu IP pública real en formato `/32`.
+- Revisa costos de recursos antes de aplicar en cuentas productivas.
+- Considera usar backend remoto para estado en equipos (S3 + DynamoDB lock).
+
+## Solución de problemas
+
+- Error de credenciales AWS:
+    - Verifica `aws sts get-caller-identity`.
+- Error por AMI inválida en región:
+    - Ajusta `ami_id` a una AMI existente en la región configurada.
+- Error de zona/subred:
+    - Alinea `availability_zone` con la región activa.
+- No puedes conectarte por SSH:
+    - Revisa `ssh_ip`, reglas del Security Group y método de acceso de la AMI.
+
+## Mejoras sugeridas para evolución
+
+- Parametrizar la región (hoy está fija en el provider).
+- Definir versiones mínimas de Terraform y provider AWS en un archivo `versions.tf`.
+- Añadir backend remoto para estado compartido.
+- Incorporar una instancia en subred privada + NAT Gateway para escenarios más realistas.

@@ -1,5 +1,10 @@
 # Terraform AWS - Infraestructura modular con EC2
 
+![Terraform](https://img.shields.io/badge/Terraform-IaC-844FBA?logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-Cloud-232F3E?logo=amazonaws&logoColor=white)
+![Licencia](https://img.shields.io/badge/Licencia-No%20especificada-lightgrey)
+![Estado](https://img.shields.io/badge/Estado-Activo-success)
+
 Este repositorio aprovisiona una infraestructura base en AWS usando Terraform y una arquitectura por módulos.
 
 El despliegue crea:
@@ -11,6 +16,47 @@ El despliegue crea:
 - La asociación de tabla de rutas a la subred.
 - Un Security Group con reglas para SSH, HTTP y HTTPS.
 - Una instancia EC2 en subred pública.
+
+## Quick Start
+
+Onboarding rapido en menos de 5 minutos:
+
+1. Configura tus credenciales AWS:
+
+```bash
+aws configure
+```
+
+2. Inicializa Terraform en la raiz del proyecto:
+
+```bash
+terraform init
+```
+
+3. (Opcional pero recomendado) formatea y valida:
+
+```bash
+terraform fmt -recursive
+terraform validate
+```
+
+4. Genera y revisa el plan:
+
+```bash
+terraform plan -out=tfplan
+```
+
+5. Aplica la infraestructura:
+
+```bash
+terraform apply tfplan
+```
+
+6. Consulta la IP publica de la instancia:
+
+```bash
+terraform output public_ip
+```
 
 ## Objetivo del proyecto
 

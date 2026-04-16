@@ -4,25 +4,25 @@ provider "aws" {
 
 # Crear una VPC
 module "vpc" {
-  source  = "./modules/1-vpc"
+  source   = "./modules/1-vpc"
   vpc_cidr = var.vpc_cidr
-  name    = "free-tier-vpc"
+  name     = "free-tier-vpc"
 }
 
 # Crear una subred pública
 module "subnet" {
-  source             = "./modules/2-subnet"
-  vpc_id             = module.vpc.vpc_id
-  subnet_cidr        = var.subnet_cidr
-  availability_zone  = var.availability_zone
-  name               = "free-tier-subnet"
+  source            = "./modules/2-subnet"
+  vpc_id            = module.vpc.vpc_id
+  subnet_cidr       = var.subnet_cidr
+  availability_zone = var.availability_zone
+  name              = "free-tier-subnet"
 }
 
 # Crear una puerta de enlace de internet
 module "internet_gateway" {
-  source  = "./modules/5-internet_gateway"
-  vpc_id  = module.vpc.vpc_id
-  name    = "free-tier-igw"
+  source = "./modules/5-internet_gateway"
+  vpc_id = module.vpc.vpc_id
+  name   = "free-tier-igw"
 }
 
 # Crear una tabla de rutas
@@ -55,10 +55,10 @@ module "security_group" {
 
 # Crear una instancia EC2
 module "ec2_instance" {
-  source             = "./modules/4-ec2_instance"
-  ami_id             = var.ami_id
-  instance_type      = var.instance_type
-  subnet_id          = module.subnet.subnet_id
-  security_group_id  = module.security_group.security_group_id
-  name               = "free-tier-instance"
+  source            = "./modules/4-ec2_instance"
+  ami_id            = var.ami_id
+  instance_type     = var.instance_type
+  subnet_id         = module.subnet.subnet_id
+  security_group_id = module.security_group.security_group_id
+  name              = "free-tier-instance"
 }

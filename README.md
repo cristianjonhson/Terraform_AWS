@@ -1,8 +1,8 @@
 # Terraform AWS - Infraestructura modular con EC2
 
 ![Terraform](https://img.shields.io/badge/Terraform-IaC-844FBA?logo=terraform&logoColor=white)
+![Terraform Latest](https://img.shields.io/github/v/release/hashicorp/terraform?label=Terraform%20Latest&logo=terraform&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-Cloud-232F3E?logo=amazonaws&logoColor=white)
-
 ![Estado](https://img.shields.io/badge/Estado-Activo-success)
 
 Este repositorio aprovisiona una infraestructura base en AWS usando Terraform y una arquitectura por módulos.
@@ -222,6 +222,24 @@ Cuando quieras eliminar todo lo creado:
 ```bash
 terraform destroy
 ```
+
+## Costos estimados
+
+Estimación orientativa para us-east-1 (puede variar por fecha, región, consumo y tipo de cuenta):
+
+| Recurso | Configuración estimada | Costo mensual aprox. |
+|---|---|---:|
+| EC2 | 1 x t2.micro (On-Demand) | ~USD 8 - 10 |
+| EBS | Volumen raíz gp2/gp3 pequeño (8-10 GB) | ~USD 0.8 - 1.2 |
+| Transferencia de datos | Tráfico saliente variable | Depende del uso |
+| VPC/Subnet/Route Table/IGW/SG | Componentes base de red | USD 0 (sin NAT Gateway) |
+| **Total base estimado** | **Sin considerar free tier ni alto tráfico** | **~USD 9 - 12 / mes** |
+
+Notas:
+
+- Si tu cuenta aplica al AWS Free Tier y mantienes los límites, el costo puede ser cercano a USD 0.
+- El mayor impacto suele venir de transferencia de datos, almacenamiento y recursos adicionales no contemplados.
+- Para validación exacta, utiliza AWS Pricing Calculator antes de pasar a entornos productivos.
 
 ## Buenas prácticas y seguridad
 

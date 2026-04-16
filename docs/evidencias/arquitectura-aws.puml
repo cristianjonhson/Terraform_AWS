@@ -1,0 +1,41 @@
+@startuml
+' Arquitectura Terraform AWS - version PlantUML
+left to right direction
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam defaultTextAlignment center
+skinparam packageStyle rectangle
+skinparam rectangle {
+  RoundCorner 12
+  BorderThickness 2
+}
+
+rectangle "Internet / Usuario" as internet #F8FAFC
+
+package "AWS Cloud (us-east-1)" #F9FAFB {
+  package "VPC 10.0.0.0/16" #EAF2FF {
+
+    rectangle "Internet Gateway" as igw #DCEBFF
+
+    package "Public Subnet 10.0.1.0/24" #EEF7FF {
+      rectangle "Route Table\n0.0.0.0/0 -> IGW" as rt #DCEBFF
+      rectangle "Security Group\nSSH 22 | HTTP 80 | HTTPS 443" as sg #FFEBD6
+      rectangle "EC2 Instance\nt2.micro" as ec2 #FFE3E8
+    }
+  }
+}
+
+internet --> sg : SSH / HTTP / HTTPS
+sg --> ec2 : Inbound rules
+ec2 --> rt : Default route
+rt --> igw : Route to Internet
+igw --> internet : Egress
+
+legend right
+|= Dominio |= Color |
+| Red | Azul |
+| Seguridad | Naranja |
+| Computo | Rojo |
+endlegend
+
+@enduml

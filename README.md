@@ -241,6 +241,31 @@ Notas:
 - El mayor impacto suele venir de transferencia de datos, almacenamiento y recursos adicionales no contemplados.
 - Para validación exacta, utiliza AWS Pricing Calculator antes de pasar a entornos productivos.
 
+## Evidencias
+
+Se recomienda adjuntar evidencias visuales para PR y portfolio:
+
+- Captura de la salida de terraform plan.
+- Captura de terraform apply exitoso.
+- Captura de terraform output public_ip y/o salida completa.
+- Diagrama o captura de la arquitectura desplegada en AWS.
+
+Plantilla sugerida:
+
+```md
+### 1) Plan de Terraform
+![Terraform Plan](docs/evidencias/terraform-plan.png)
+
+### 2) Apply exitoso
+![Terraform Apply](docs/evidencias/terraform-apply.png)
+
+### 3) Outputs de infraestructura
+![Terraform Outputs](docs/evidencias/terraform-outputs.png)
+
+### 4) Arquitectura AWS
+![Arquitectura AWS](docs/evidencias/arquitectura-aws.png)
+```
+
 ## Buenas prácticas y seguridad
 
 - No subas archivos `.tfvars` con secretos al repositorio.

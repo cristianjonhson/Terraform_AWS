@@ -253,6 +253,18 @@ Se recomienda adjuntar evidencias visuales para PR y portfolio:
 
 ![Arquitectura AWS alternativa para portfolio](docs/evidencias/arquitectura-aws-v2.png)
 
+### Arquitectura AWS (fuente PlantUML)
+
+Fuente editable en PlantUML:
+
+- docs/evidencias/arquitectura-aws.puml
+
+Exportacion sugerida (si tienes PlantUML instalado localmente):
+
+```bash
+plantuml -tpng docs/evidencias/arquitectura-aws.puml
+```
+
 - Captura de la salida de terraform plan.
 - Captura de terraform apply exitoso.
 - Captura de terraform output public_ip y/o salida completa.
@@ -275,6 +287,9 @@ Plantilla sugerida:
 
 ### 5) Arquitectura AWS (alternativa)
 ![Arquitectura AWS alternativa](docs/evidencias/arquitectura-aws-v2.png)
+
+### 6) Arquitectura AWS (PlantUML)
+![Arquitectura AWS PlantUML](docs/evidencias/arquitectura-aws.png)
 ```
 
 ## Buenas prácticas y seguridad

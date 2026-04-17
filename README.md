@@ -265,6 +265,18 @@ Exportacion sugerida (si tienes PlantUML instalado localmente):
 plantuml -tpng docs/evidencias/arquitectura-aws.puml
 ```
 
+Si no tienes el comando plantuml instalado, alternativa con Docker:
+
+```bash
+docker run --rm -v "$PWD":/work -w /work plantuml/plantuml -tpng docs/evidencias/arquitectura-aws.puml
+```
+
+Alternativa con Java + JAR de PlantUML:
+
+```bash
+java -jar tools/plantuml/plantuml.jar -tpng docs/evidencias/arquitectura-aws.puml
+```
+
 - Captura de la salida de terraform plan.
 - Captura de terraform apply exitoso.
 - Captura de terraform output public_ip y/o salida completa.

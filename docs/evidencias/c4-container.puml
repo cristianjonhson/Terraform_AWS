@@ -1,0 +1,25 @@
+@startuml c4-container
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+LAYOUT_LEFT_RIGHT()
+
+Person(user, "Usuario", "Admin o desarrollador")
+
+System_Boundary(aws, "AWS (us-east-1)") {
+  Container_Boundary(vpcBoundary, "VPC 10.0.0.0/16") {
+    Container(igw, "Internet Gateway", "AWS Network", "Salida y entrada a Internet")
+    Container(subnet, "Public Subnet 10.0.1.0/24", "AWS Network", "Subred pública para EC2")
+    Container(rt, "Route Table", "AWS Network", "Ruta 0.0.0.0/0 hacia IGW")
+    Container(sg, "Security Group", "AWS Security", "Reglas SSH 22, HTTP 80, HTTPS 443")
+    Container(ec2, "EC2 t2.micro", "AWS Compute", "Instancia pública")
+  }
+}
+
+Rel(user, sg, "Solicitudes SSH/HTTP/HTTPS", "Internet")
+Rel(sg, ec2, "Permite tráfico")
+Rel(ec2, rt, "Usa ruta por defecto")
+Rel(rt, igw, "Redirige 0.0.0.0/0")
+Rel(igw, user, "Respuesta de red", "Internet")
+Rel(subnet, ec2, "Aloja")
+
+SHOW_LEGEND()
+@enduml

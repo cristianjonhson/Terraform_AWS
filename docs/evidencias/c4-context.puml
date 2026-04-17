@@ -1,0 +1,13 @@
+@startuml c4-context
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+LAYOUT_LEFT_RIGHT()
+
+Person(user, "Usuario", "Admin o desarrollador que accede a la instancia")
+System_Boundary(aws, "AWS (us-east-1)") {
+  System(terraformStack, "Terraform AWS Stack", "Infraestructura provisionada por Terraform")
+}
+
+Rel(user, terraformStack, "Accede por SSH/HTTP/HTTPS", "Internet")
+
+SHOW_LEGEND()
+@enduml

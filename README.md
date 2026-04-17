@@ -277,6 +277,22 @@ Alternativa con Java + JAR de PlantUML:
 java -jar tools/plantuml/plantuml.jar -tpng docs/evidencias/arquitectura-aws.puml
 ```
 
+### C4-PlantUML (Context)
+
+![C4 Context del proyecto](docs/evidencias/c4-context.png)
+
+Fuente:
+
+- docs/evidencias/c4-context.puml
+
+### C4-PlantUML (Container)
+
+![C4 Container del proyecto](docs/evidencias/c4-container.png)
+
+Fuente:
+
+- docs/evidencias/c4-container.puml
+
 - Captura de la salida de terraform plan.
 - Captura de terraform apply exitoso.
 - Captura de terraform output public_ip y/o salida completa.
@@ -302,6 +318,14 @@ Plantilla sugerida:
 
 ### 6) Arquitectura AWS (PlantUML)
 Fuente: docs/evidencias/arquitectura-aws.puml
+
+### 7) C4 Context
+![C4 Context](docs/evidencias/c4-context.png)
+Fuente: docs/evidencias/c4-context.puml
+
+### 8) C4 Container
+![C4 Container](docs/evidencias/c4-container.png)
+Fuente: docs/evidencias/c4-container.puml
 ```
 
 ## Buenas prácticas y seguridad

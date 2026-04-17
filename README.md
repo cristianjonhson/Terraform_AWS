@@ -245,6 +245,14 @@ Notas:
 
 Se recomienda adjuntar evidencias visuales para PR y portfolio:
 
+### Criterio de uso
+
+- Usa Arquitectura AWS cuando quieras mostrar rapidamente los recursos reales desplegados y su conectividad.
+- Usa C4 Context cuando necesites explicar el alcance del sistema y su relacion con el usuario o actores externos.
+- Usa C4 Container cuando el foco sea la estructura interna de la solucion y como colaboran los bloques principales.
+- En PR tecnico: prioriza C4 Container + evidencia de plan/apply/output.
+- En portfolio: abre con Arquitectura AWS (impacto visual) y complementa con C4 Context para narrativa.
+
 ### Arquitectura AWS (actual)
 
 ![Arquitectura AWS del proyecto](docs/evidencias/arquitectura-aws.png)

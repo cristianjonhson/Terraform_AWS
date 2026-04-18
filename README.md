@@ -245,6 +245,11 @@ Notas:
 
 Se recomienda adjuntar evidencias visuales para PR y portfolio:
 
+Documentos de apoyo para estandarizar capturas:
+
+- docs/evidencias/GUIA_NOMBRE_SCREENSHOTS.md
+- docs/evidencias/EVIDENCIAS_CHECKLIST.md
+
 ### Criterio de uso
 
 - Usa Arquitectura AWS cuando quieras mostrar rapidamente los recursos reales desplegados y su conectividad.

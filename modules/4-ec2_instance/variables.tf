@@ -1,46 +1,46 @@
 # Variable para el ID de la AMI (Amazon Machine Image) de la instancia EC2
 variable "ami_id" {
-  description = "AMI ID for the EC2 instance" # Descripción de la variable
+  description = "ID de la AMI para la instancia EC2" # Descripción de la variable
   type        = string
 }
 
 # Variable para el tipo de instancia EC2
 variable "instance_type" {
-  description = "EC2 instance type" # Descripción de la variable
+  description = "Tipo de instancia EC2" # Descripción de la variable
   type        = string
 }
 
 variable "subnet_id" {
-  description = "ID of the subnet"
+  description = "ID de la subred"
   type        = string
 }
 
 variable "security_group_id" {
-  description = "ID of the security group"
+  description = "ID del Security Group"
   type        = string
 }
 
 variable "metadata_http_tokens_required" {
-  description = "Require IMDSv2 tokens"
+  description = "Requerir tokens IMDSv2"
   type        = bool
 }
 
 variable "root_volume_encrypted" {
-  description = "Enable encryption for root EBS volume"
+  description = "Habilitar cifrado del volumen raíz EBS"
   type        = bool
 }
 
 variable "root_volume_size" {
-  description = "Root EBS volume size in GiB"
+  description = "Tamaño del volumen raíz EBS en GiB"
   type        = number
 }
 
 variable "root_volume_type" {
-  description = "Root EBS volume type"
+  description = "Tipo de volumen raíz EBS"
   type        = string
 }
 
 variable "name" {
-  description = "Name for the EC2 instance"
+  description = "Nombre para la instancia EC2"
   type        = string
 }

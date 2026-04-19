@@ -31,7 +31,7 @@ variable "instance_type" {
 
 # Variable para el puerto SSH
 variable "ssh_port" {
-  description = "Port for SSH access"
+  description = "Puerto para acceso SSH"
   default     = 22
 
   validation {
@@ -42,7 +42,7 @@ variable "ssh_port" {
 
 # Variable para el puerto HTTP
 variable "http_port" {
-  description = "Port for HTTP access"
+  description = "Puerto para acceso HTTP"
   default     = 80
 
   validation {
@@ -53,7 +53,7 @@ variable "http_port" {
 
 # Variable para el puerto HTTPS
 variable "https_port" {
-  description = "Port for HTTPS access"
+  description = "Puerto para acceso HTTPS"
   default     = 443
 
   validation {

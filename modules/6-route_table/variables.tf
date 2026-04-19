@@ -1,19 +1,19 @@
 variable "vpc_id" {
-  description = "ID of the VPC"
+  description = "ID de la VPC"
   type        = string
 }
 
 variable "igw_id" {
-  description = "ID of the Internet Gateway"
+  description = "ID del Internet Gateway"
   type        = string
 }
 
 variable "all_traffic_cidr" {
-  description = "CIDR block to allow all traffic"
+  description = "Bloque CIDR para permitir todo el tráfico"
   type        = string
 }
 
 variable "name" {
-  description = "Name for the route table"
+  description = "Nombre para la tabla de rutas"
   type        = string
 }
